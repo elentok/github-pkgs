@@ -1,0 +1,128 @@
+[
+  {
+    "name": "nvim",
+    "githubRepo": "neovim/neovim",
+    "stripComponents": 1,
+    "assets": {
+      "linux-x86": {
+        "bin_source": "bin/nvim",
+        "regexp": "nvim-linux64.tar.gz"
+      },
+      "mac-arm": {
+        "bin_source": "bin/nvim",
+        "regexp": "nvim-macos-arm64.tar.gz"
+      }
+    }
+  },
+  {
+    "name": "eza",
+    "githubRepo": "eza-community/eza",
+    "assets": {
+      "linux-x86": {
+        "regexp": "eza_x86_64-unknown-linux-gnu.*"
+      }
+    }
+  },
+  {
+    "name": "ripgrep",
+    "githubRepo": "BurntSushi/ripgrep",
+    "binTarget": "rg",
+    "stripComponents": 1,
+    "assets": {
+      "linux-x86": {
+        "regexp": "ripgrep-.*-x86_64-unknown-linux.*"
+      },
+      "mac-x86": {
+        "regexp": "ripgrep-.*-x86_64-apple-darwin.*"
+      },
+      "linux-arm": {
+        "regexp": "ripgrep-.*arm-unknown-linux-.*"
+      }
+    }
+  },
+  {
+    "name": "gron",
+    "githubRepo": "tomnomnom/gron",
+    "version": "prerelease",
+    "assets": {
+      "linux-x86": {
+        "regexp": "gron-linux-amd64.*"
+      },
+      "mac-x86": {
+        "regexp": "gron-darwin-amd64.*"
+      }
+    }
+  },
+  {
+    "name": "delta",
+    "githubRepo": "dandavison/delta",
+    "stripComponents": 1,
+    "assets": {
+      "linux-x86": {
+        "regexp": "delta-.*-x86_64-unknown-linux-musl.*"
+      },
+      "mac-x86": {
+        "regexp": "delta-.*-x86_64-apple-darwin.*"
+      },
+      "linux-arm": {
+        "regexp": "delta-.*-arm-unknown-linux.*"
+      }
+    }
+  },
+  {
+    "name": "bat",
+    "githubRepo": "sharkdp/bat",
+    "stripComponents": 1,
+    "assets": {
+      "linux-x86": {
+        "regexp": "bat-.*-x86_64-unknown-linux-musl.*"
+      },
+      "linux-arm": {
+        "regexp": "bat-.*-arm-.*"
+      }
+    }
+  },
+  {
+    "name": "verco",
+    "githubRepo": "matheuslessarodrigues/verco",
+    "extract": "false",
+    "assets": {
+      "linux-x86": {
+        "regexp": "verco-linux-x86_64"
+      }
+    }
+  },
+  {
+    "name": "bottom",
+    "githubRepo": "ClementTsang/bottom",
+    "binTarget": "btm",
+    "assets": {
+      "linux-x86": {
+        "regexp": "bottom_x86_64-unknown-linux-gnu.tar.gz"
+      },
+      "linux-arm": {
+        "regexp": "bottom_armv7-unknown-linux-gnueabihf.tar.gz"
+      }
+    }
+  },
+  {
+    "name": "jira",
+    "githubRepo": "go-jira/jira",
+    "extract": false,
+    "assets": {
+      "mac-x86": {
+        "regexp": "jira-darwin-amd64"
+      }
+    }
+  },
+  {
+    "name": "fd",
+    "githubRepo": "sharkdp/fd",
+    "stripComponents": 1,
+    "assets": {
+      "linux-x86": {
+        "regexp": "fd-.*-x86_64-unknown-linux-gnu.tar.gz"
+      }
+    }
+  }
+]
