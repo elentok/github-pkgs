@@ -1,6 +1,6 @@
-import { loadPackages } from "../lib/packages.ts"
+import { loadConfig } from "../lib/config.ts"
 
 export function list() {
-  const packages = loadPackages()
+  const packages = loadConfig()
   console.log(packages)
 }
