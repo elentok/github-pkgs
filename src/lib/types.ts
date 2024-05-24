@@ -5,7 +5,7 @@ export interface Package {
   githubRepo: string
   stripComponents: number
   binTarget: string
-  version?: string
+  version: string
   assets: Partial<Record<Platform, PackageAsset>>
 }
 
@@ -15,6 +15,6 @@ export interface PackageAsset {
 }
 
 export interface InstallResult {
-  success: boolean
+  status: "installed" | "already-installed" | "unsupported-platform" | "error"
   details?: string
 }

@@ -11,8 +11,9 @@ export function loadConfig(filename: string = defaultConfigFile()): Package[] {
   const raw = JSON.parse(Deno.readTextFileSync(filename))
   const pkgConfigs = configSchema.cast(raw) ?? []
   return pkgConfigs.map((pkgConfig) => ({
+    binTarget: pkgConfig.name,
+    stripComponents: 0,
+    version: "latest",
     ...pkgConfig,
-    binTarget: pkgConfig.binTarget ?? pkgConfig.name,
-    stripComponents: pkgConfig.stripComponents ?? 0,
   }))
 }

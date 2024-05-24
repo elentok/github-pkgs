@@ -10,6 +10,7 @@ const packageConfigSchema = Yup.object({
   githubRepo: Yup.string().required(),
   binTarget: Yup.string(),
   stripComponents: Yup.number(),
+  version: Yup.string(),
   assets: Yup.object({
     "linux-x86": assetSchema.default(undefined),
     "linux-arm": assetSchema.default(undefined),
