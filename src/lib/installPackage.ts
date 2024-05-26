@@ -1,9 +1,12 @@
 import * as path from "std:path"
+import * as fs from "std:fs"
 import { fetchRelease } from "./github/github.ts"
-import { currentPlatform } from "./helpers.ts"
+import { currentPlatform, download, makeExecutable } from "./helpers.ts"
 import { isInstalled } from "./package.ts"
-import { InstallResult, Package } from "./types.ts"
+import { InstallResult, Package, PackageAsset } from "./types.ts"
 import { APPS_ALL } from "./appsDir.ts"
+import { GithubAsset, GithubRelease } from "./github/types.ts"
+import { extract } from "./extract.ts"
 
 export async function installPackage(pkg: Package): Promise<InstallResult> {
   if (isInstalled(pkg)) {
@@ -29,25 +32,33 @@ export async function installPackage(pkg: Package): Promise<InstallResult> {
     return { status: "error", details: `Could find asset to match regexp '${assetConfig.regexp} ` }
   }
 
-  download({ pkg, assetConfig, release, asset })
+  downloadPackage({ pkg, assetConfig, release, asset })
 
   console.log("[bazinga] [installPackage.ts] installPackage", release)
   // const version = pkg.version
 }
 
-function download(
-  { pkg, assetConfig, release, asset }: {
-    pkg: Package
-    assetConfig: PackageAsset
-    release: GithubRelease
-    asset: GithubAsset
-  },
-): Promise<InstallResult> {
-  // const releaseDirname = path.join(APPS_ALL, pkg.name, release.tagName)
-  // const ext = asset.ext ?? path.extname(asset.name)
-  // const assetFilename = path.join(releaseDirname, `${pkg.name}{ext}`)
-  // const binSource = assetConfig.binSource ?? pkg.binTarget
+interface PackageContext {
+  pkg: Package
+  assetConfig: PackageAsset
+  release: GithubRelease
+  asset: GithubAsset
+}
 
-  // // TODO:
-  // return { status: "error" }
+async function downloadPackage(
+  { pkg, assetConfig, release, asset }: PackageContext,
+): Promise<InstallResult> {
+  const releaseDirname = path.join(APPS_ALL, pkg.name, release.tagName)
+  const ext = asset.ext ?? path.extname(asset.name)
+  const assetFilename = path.join(releaseDirname, `${pkg.name}{ext}`)
+  const binSource = assetConfig.binSource ?? pkg.binTarget
+
+  console.info(`* Downloading ${assetFilename}...`)
+  download(asset.browserDownloadUrl, assetFilename)
+  await extract(assetFilename, pkg.stripComponents)
+
+  const fullBinSource = path.join(releaseDirname, binSource)
+  await makeExecutable(fullBinSource)
+
+  return { status: "error" }
 }

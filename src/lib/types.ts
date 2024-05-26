@@ -6,6 +6,8 @@ export interface Package {
   stripComponents: number
   binTarget: string
   version: string
+  extract: boolean
+  postExtract?: string
   assets: Partial<Record<Platform, PackageAsset>>
 }
 

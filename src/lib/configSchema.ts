@@ -11,6 +11,8 @@ const packageConfigSchema = Yup.object({
   binTarget: Yup.string(),
   stripComponents: Yup.number(),
   version: Yup.string(),
+  extract: Yup.boolean().default(true),
+  postExtract: Yup.string(),
   assets: Yup.object({
     "linux-x86": assetSchema.default(undefined),
     "linux-arm": assetSchema.default(undefined),
