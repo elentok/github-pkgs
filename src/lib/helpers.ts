@@ -1,6 +1,7 @@
 import { shell, ShellResult } from "./shell.ts"
 import { Platform } from "./types.ts"
 import * as fs from "std:fs"
+import * as path from "std:path"
 
 export function currentPlatform(): Platform {
   if (Deno.build.os === "darwin") {
@@ -21,6 +22,8 @@ export async function download(
     } else {
       throw new Error(`Cannot download ${url}, file ${filename} already exists`)
     }
+  } else {
+    await fs.ensureDir(path.dirname(filename))
   }
 
   const response = await fetch(url)
@@ -34,5 +37,5 @@ export async function download(
 
 export function makeExecutable(filename: string): Promise<ShellResult> {
   console.info(`- making ${filename} executable ...`)
-  return shell(`chmod u+x ${filename}`)
+  return shell("chmod", { args: ["u+x", filename] })
 }

@@ -8,15 +8,15 @@ export interface Package {
   version: string
   extract: boolean
   postExtract?: string
-  assets: Partial<Record<Platform, PackageAsset>>
+  assets: Partial<Record<Platform, AssetConfig>>
 }
 
-export interface PackageAsset {
+export interface AssetConfig {
   binSource?: string
   regexp: string
 }
 
 export interface InstallResult {
-  status: "installed" | "already-installed" | "unsupported-platform" | "error"
+  status: "success" | "already-installed" | "unsupported-platform" | "error"
   details?: string
 }

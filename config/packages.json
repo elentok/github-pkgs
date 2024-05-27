@@ -5,11 +5,11 @@
     "stripComponents": 1,
     "assets": {
       "linux-x86": {
-        "bin_source": "bin/nvim",
+        "binSource": "bin/nvim",
         "regexp": "nvim-linux64.tar.gz"
       },
       "mac-arm": {
-        "bin_source": "bin/nvim",
+        "binSource": "bin/nvim",
         "regexp": "nvim-macos-arm64.tar.gz"
       }
     }
@@ -111,6 +111,9 @@
     "extract": false,
     "assets": {
       "mac-x86": {
+        "regexp": "jira-darwin-amd64"
+      },
+      "mac-arm": {
         "regexp": "jira-darwin-amd64"
       }
     }
