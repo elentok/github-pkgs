@@ -1,9 +1,8 @@
-import * as path from "std:path"
 import * as fs from "std:fs"
 import { download, makeExecutable } from "./helpers.ts"
 import { isInstalled } from "./package.ts"
-import { AssetConfig, InstallResult, Package } from "./types.ts"
-import { APPS_ALL, APPS_BIN } from "./appsDir.ts"
+import { InstallResult, Package } from "./types.ts"
+import { APPS_BIN } from "./appsDir.ts"
 import { extract } from "./extract.ts"
 import { findAsset } from "./findAsset.ts"
 
