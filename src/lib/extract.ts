@@ -1,12 +1,13 @@
 import * as path from "std:path"
 import { shell } from "./shell.ts"
+import { bullet } from "./ui.ts"
 
 export async function extract(filename: string, stripComponents = 0): Promise<void> {
   const basename = path.basename(filename)
   const dirname = path.dirname(filename)
   const { cmd, args } = extractCommand(basename, stripComponents)
 
-  console.info("* Extracting")
+  bullet(`Extracting ${filename}...`)
   const result = await shell(cmd, { args, cwd: dirname })
   if (!result.success) {
     throw new Error(

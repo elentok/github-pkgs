@@ -7,8 +7,11 @@ import { extract } from "./extract.ts"
 import { findAsset } from "./findAsset.ts"
 import { bullet } from "./ui.ts"
 
-export async function installPackage(pkg: Package): Promise<InstallResult> {
-  if (isInstalled(pkg)) {
+export async function installPackage(
+  pkg: Package,
+  { force }: { force?: boolean } = {},
+): Promise<InstallResult> {
+  if (!force && isInstalled(pkg)) {
     return { pkg, status: "already-installed" }
   }
 
@@ -36,7 +39,7 @@ export async function installPackage(pkg: Package): Promise<InstallResult> {
 }
 
 async function link(target: string, source: string) {
-  console.info("* Linking...")
+  bullet(`Linking ${target}...`)
 
   await Deno.mkdir(APPS_BIN, { recursive: true })
   if (await fs.exists(target)) {

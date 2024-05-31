@@ -21,3 +21,9 @@ export interface InstallResult {
   status: "success" | "already-installed" | "unsupported-platform" | "error"
   details?: string
 }
+
+export interface InstallFlags {
+  ignoreUnsupported?: boolean
+  force?: boolean
+  update?: boolean
+}

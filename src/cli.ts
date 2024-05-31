@@ -14,6 +14,7 @@ function main() {
     .action(list)
 
   program.command("install")
+    .option("-f, --force", "Force reinstall", false)
     .argument("[pkg...]")
     .description("Install packages")
     .action(installCommand)

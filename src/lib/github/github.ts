@@ -1,3 +1,4 @@
+import { bullet } from "../ui.ts"
 import {
   GITHUB_ASSET_EXTENSIONS,
   GithubAsset,
@@ -39,7 +40,7 @@ interface RawAsset {
 
 async function fetchReleases(repo: string): Promise<GithubRelease[]> {
   const url = `https://api.github.com/repos/${repo}/releases`
-  console.info(`* Fetching releases for ${repo}...`)
+  bullet(`Fetching releases for ${repo}...`)
   const response = await fetch(url)
   const json = await response.json() as RawRelease[]
   return json.map(parseRelease)

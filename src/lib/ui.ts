@@ -1,5 +1,11 @@
 import chalk from "npm:chalk"
 
+export function header(text: string) {
+  console.info()
+  console.info(chalk.blue(`✨ ${text}`))
+  console.info()
+}
+
 export function success(text: string) {
   console.info(chalk.green(`✔ ${text}`))
 }
@@ -19,5 +25,5 @@ export function error(text: string) {
 }
 
 export function bullet(text: string) {
-  console.info(`• ${text}`)
+  console.info(`▶ ${text}`)
 }

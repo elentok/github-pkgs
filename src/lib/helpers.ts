@@ -2,6 +2,7 @@ import { shell, ShellResult } from "./shell.ts"
 import { Platform } from "./types.ts"
 import * as fs from "std:fs"
 import * as path from "std:path"
+import { bullet } from "./ui.ts"
 
 export function currentPlatform(): Platform {
   if (Deno.build.os === "darwin") {
@@ -36,6 +37,6 @@ export async function download(
 }
 
 export function makeExecutable(filename: string): Promise<ShellResult> {
-  console.info(`- making ${filename} executable ...`)
+  bullet(`making ${filename} executable ...`)
   return shell("chmod", { args: ["u+x", filename] })
 }
