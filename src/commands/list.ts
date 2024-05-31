@@ -1,6 +1,6 @@
 import { loadConfig } from "../lib/config.ts"
 import { currentPlatform } from "../lib/helpers.ts"
-import { isInstalled } from "../lib/package.ts"
+import { installedTagName, isInstalled } from "../lib/package.ts"
 import { Package } from "../lib/types.ts"
 import chalk from "npm:chalk"
 
@@ -11,7 +11,8 @@ export function list() {
     const icon = getStatusIcon(status)
     let text = `${icon} ${pkg.name}`
     if (status === "installed") {
-      text = chalk.green(text)
+      const tagName = installedTagName(pkg)
+      text = chalk.green(`${text} (${tagName})`)
     } else if (status === "unsupported") {
       text = `${text} (unsupported)`
     }

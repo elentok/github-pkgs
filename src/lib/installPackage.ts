@@ -1,7 +1,7 @@
 import * as fs from "std:fs"
 import { download, makeExecutable } from "./helpers.ts"
-import { isInstalled } from "./package.ts"
-import { InstallResult, Package } from "./types.ts"
+import { installedTagName, isInstalled } from "./package.ts"
+import { InstallFlags, InstallResult, Package } from "./types.ts"
 import { APPS_BIN } from "./appsDir.ts"
 import { extract } from "./extract.ts"
 import { findAsset } from "./findAsset.ts"
@@ -9,15 +9,19 @@ import { bullet } from "./ui.ts"
 
 export async function installPackage(
   pkg: Package,
-  { force }: { force?: boolean } = {},
+  { force, update }: InstallFlags = {},
 ): Promise<InstallResult> {
-  if (!force && isInstalled(pkg)) {
+  if (!force && !update && isInstalled(pkg)) {
     return { pkg, status: "already-installed" }
   }
 
   const assetContext = await findAsset(pkg)
   if ("status" in assetContext) {
     return assetContext
+  }
+
+  if (assetContext.release.tagName === installedTagName(pkg)) {
+    return { pkg, status: "up-to-date" }
   }
 
   const { asset, assetFilename, fullBinSource, fullBinTarget } = assetContext
