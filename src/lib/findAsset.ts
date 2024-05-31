@@ -8,20 +8,23 @@ import { APPS_ALL, APPS_BIN } from "./appsDir.ts"
 export async function findAsset(pkg: Package): Promise<InstallResult | AssetContext> {
   const assetConfig = pkg.assets[currentPlatform()]
   if (assetConfig == null) {
-    console.info(`Package ${pkg.name} does not support ${currentPlatform()}`)
-    return { status: "unsupported-platform" }
+    return { pkg, status: "unsupported-platform" }
   }
 
   const release = await fetchRelease(pkg.githubRepo, pkg.version)
   if (release == null) {
     console.error(`Could not find releases for ${pkg.name}`)
-    return { status: "error", details: "Could find any releases" }
+    return { pkg, status: "error", details: "Could find any releases" }
   }
 
   const asset = release.assets.find((a) => a.name.match(assetConfig.regexp))
   if (asset == null) {
     console.error(`Could not find asset for ${pkg.name} (${assetConfig.regexp})`)
-    return { status: "error", details: `Could find asset to match regexp '${assetConfig.regexp} ` }
+    return {
+      pkg,
+      status: "error",
+      details: `Could find asset to match regexp '${assetConfig.regexp} `,
+    }
   }
 
   const ext = asset.ext ?? path.extname(asset.name)

@@ -5,11 +5,11 @@ import { InstallResult, Package } from "./types.ts"
 import { APPS_BIN } from "./appsDir.ts"
 import { extract } from "./extract.ts"
 import { findAsset } from "./findAsset.ts"
+import { bullet } from "./ui.ts"
 
 export async function installPackage(pkg: Package): Promise<InstallResult> {
   if (isInstalled(pkg)) {
-    console.info(`* Package ${pkg.name} is already installed`)
-    return { status: "already-installed" }
+    return { pkg, status: "already-installed" }
   }
 
   const assetContext = await findAsset(pkg)
@@ -19,7 +19,7 @@ export async function installPackage(pkg: Package): Promise<InstallResult> {
 
   const { asset, assetFilename, fullBinSource, fullBinTarget } = assetContext
 
-  console.info(`* Downloading ${assetFilename}...`)
+  bullet(`Downloading ${assetFilename}...`)
   await download(asset.browserDownloadUrl, assetFilename, { overwrite: true })
 
   if (pkg.extract) {
@@ -32,7 +32,7 @@ export async function installPackage(pkg: Package): Promise<InstallResult> {
 
   await link(fullBinTarget, fullBinSource)
 
-  return { status: "success" }
+  return { pkg, status: "success" }
 }
 
 async function link(target: string, source: string) {

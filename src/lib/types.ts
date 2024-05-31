@@ -17,6 +17,7 @@ export interface AssetConfig {
 }
 
 export interface InstallResult {
+  pkg: Package
   status: "success" | "already-installed" | "unsupported-platform" | "error"
   details?: string
 }
