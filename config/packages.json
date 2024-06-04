@@ -127,5 +127,16 @@
         "regexp": "fd-.*-x86_64-unknown-linux-gnu.tar.gz"
       }
     }
+  },
+  {
+    "name": "btop",
+    "githubRepo": "aristocratos/btop",
+    "stripComponents": 2,
+    "assets": {
+      "linux-x86": {
+        "binSource": "bin/btop",
+        "regexp": "btop-x86_64-linux-musl.tbz"
+      }
+    }
   }
 ]

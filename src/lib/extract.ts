@@ -27,6 +27,13 @@ function extractCommand(
     }
   }
 
+  if (filename.endsWith(".tbz")) {
+    return {
+      cmd: "tar",
+      args: ["--strip-components", stripComponents.toString(), "-xjf", filename],
+    }
+  }
+
   if (filename.endsWith(".tar.xz")) {
     return {
       cmd: "tar",
