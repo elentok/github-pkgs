@@ -138,5 +138,20 @@
         "regexp": "btop-x86_64-linux-musl.tbz"
       }
     }
+  },
+  {
+    "name": "pfetch-rs",
+    "githubRepo": "Gobidev/pfetch-rs",
+    "binTarget": "pfetch",
+    "assets": {
+      "linux-x86": {
+        "binSource": "pfetch",
+        "regexp": "pfetch-linux-musl-x86_64.tar.gz"
+      },
+      "mac-arm-disabled": {
+        "binSource": "pfetch",
+        "regexp": "pfetch-macos-aarch64.tar.gz"
+      }
+    }
   }
 ]
